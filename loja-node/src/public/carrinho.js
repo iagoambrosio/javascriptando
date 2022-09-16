@@ -3,7 +3,7 @@ const itens=[
     {
         id: 0,
         nome: 'produto_0',
-        img: 'https://cdn.sstatic.net/Img/teams/teams-illo-free-sidebar-promo.svg?v=47faa659a05e',
+        img: 'public/vazio.webp',
         quantidade: 0
     },
     {
@@ -42,7 +42,7 @@ function initShop(){
     let divProdutos = document.getElementById('produto');
     itens.map((val)=>{
       divProdutos.innerHTML+=`
-    <div class="um-produto">
+    <div class="produto-single">
         <img src="`+val.img+`"/>
         <p>`+val.nome+`</p>
         <a key="`+val.id+`" href="#">Adicionar ao carrinho!</a>
@@ -58,9 +58,12 @@ function atualizaCarrinho() {
     divCarrinho.innerHTML = ""
     itens.map((val)=>{
         if(val.quantidade > 0){
-      divCarrinho.innerHTML+=`
-   <p>`+val.nome+` | quantidade: `+val.quantidade+`</p>
-   <hr>
+      divCarrinho.innerHTML+= `
+   <div class="checkout-info">
+   <p style="float:left;">Produto: `+val.nome+`</p>
+   <p style="float:right;">Quantidade: `+val.quantidade+`</p>
+   <div style="clear:both"></div>
+    </div>
       `;
         }
     })
