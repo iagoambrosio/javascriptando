@@ -1,17 +1,19 @@
 {
-  "name": "loja-node",
+  "name": "api-node",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./index.js localhost 3000"
+    "start": "nodemon ./index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.1",
-    "mongoose": "^6.5.2",
+    "mongoose": "^6.6.1",
+    "n": "^9.0.0",
+    "nodejs": "0.0.0",
     "nodemon": "^2.0.19"
   }
 }
