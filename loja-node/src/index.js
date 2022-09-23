@@ -6,9 +6,9 @@ const path = require('path');
 const router = express.Router();
 
 router.get('/', function(req,res){
-    let aplicacao_index=__dirname+'/index.html'
-    res.sendFile(path.join(aplicacao_index));
-    console.log("Fulaninho acessou "+aplicacao_index+";")
+    let caminhoIndex=__dirname+'/index.html'
+    res.sendFile(path.join(caminhoIndex));
+    console.log(req.ip+" acessou "+caminhoIndex+";")
 });
 /**temporário, trocar por links http depois */
 /** Para conteúdo estático é melhor utilizar links no front

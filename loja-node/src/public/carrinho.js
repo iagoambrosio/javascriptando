@@ -29,6 +29,12 @@ const itens=[
         nome: 'produto_4',
         img: 'public/vazio.webp',
         quantidade: 0
+    },
+    {
+        id: 5,
+        nome: 'produto_5',
+        img: 'public/vazio.webp',
+        quantidade: 0
     }
 ]
 
@@ -64,8 +70,7 @@ function atualizaCarrinho() {
    <p style="float:right;">Quantidade: `+val.quantidade+`</p>
    <div style="clear:both"></div>
     </div>
-      `;
-        }
+      `        }
     })
 }
  
@@ -76,6 +81,6 @@ for(let i = 0; i < links.length; i++){
         let key = this.getAttribute('key');
         itens[key].quantidade++;
         atualizaCarrinho();
-        return false;
-    })
+    }
+    )
 }
