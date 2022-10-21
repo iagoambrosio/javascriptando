@@ -13,13 +13,14 @@ services:
       - net_api
   node:
     image: node
+    working_dir: /app
     volumes:
       - .:/app
     ports:
       - 3000:3000
     networks:
       - net_api
-    entrypoint: ["node", "/app/index.js","3000"]
+    entrypoint: "npm start"
 networks:
   net_api:
     driver: bridge  

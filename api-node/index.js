@@ -6,22 +6,27 @@
 ... pwd: "123456",
 ... roles: [ { role: 'root', db: "admin" } ]
  */
-// chama o modulo para conexão no banco de dados mongo
-const mongoose = require('mongoose')
+
 // colocando o modulo express dentro da variável express
- const express = require('express')
+const express = require('express')
  // colocando a função express() dentro da variavel chamaExpress
- const chamaExpress = express()
+const chamaExpress = express()
 // chama o objeto exportado em Person.js
 const Person = require('./models/Person.js')
+// chama função para conectar no banco de dados 
+const mongodbservice = require('./models/Conectar.js')
 
+
+//Conecta no mongo
+mongodbservice()
 
 // ROTAS DA API
 
 chamaExpress.post('/person',async (req,res) => {
 
+    console.log(this.req)
     // req.body
-    const {name, salary, approved} = req.body
+    const { name, salary, approved } = req.body
 
     const person = {
         name,
@@ -69,15 +74,6 @@ chamaExpress.post('/person',async (req,res) => {
  
  })
  
- //conecta ao mongodb e configura as mensagens de conexão
- mongoose
-   .connect(
-      'mongodb://mongoadmin:123456@mongodb:27017/admin'
-   )
-   .then (console.log('Conectado a admin'))
-   .catch ((err) => console.log(err))
-
-
 
  // disponibilizar porta e fixa ip na em todas as interfaces
  chamaExpress.listen(3000)
