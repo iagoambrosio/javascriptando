@@ -1,6 +1,6 @@
-export default class Conta {
+export default class conta {
     
-    static agencia = 1;
+    static agencia = 0;
 
     #saldo = 0;
 
@@ -10,8 +10,8 @@ export default class Conta {
 
     constructor(id,agencia){
         this.id = id
-        this.agencia = Conta.agencia
-        Conta.agencia++
+        this.agencia = conta.agencia
+        conta.agencia++
         
     }
 
