@@ -33,16 +33,31 @@ console.log(media3)
 const alunos = ["João","Juliana","Ana","Caio","Lara","Marjorie","Guilherme","Aline","Fabiana","Andre","Carlos","Paulo","Bia","Vivian","Vinicius","Renan","Renata","Daisy","Camilo"]
 
 // fatiando array
+console.log(`alunos: \n`)
+console.log(alunos)
 
 alunosFatiados = alunos.slice(0, 10)
+
+console.log(`alunosFatiados1 (Cria um novo array): \n`)
+console.log(alunosFatiados)
+
 alunosFatiados = alunos.slice(10)
 
+console.log(`alunosFatiados2 (Cria um novo array): \n`)
 console.log(alunosFatiados)
 
 //alterando itens da lista
 
 // juliana e ana substituidas por Rodrigo
-alunos.splice(1, 2, "Rodrigo")
+
+const alunosSubstituidos = alunos.splice(1, 2, "Rodrigo")
+
+console.log(`alunosSubstituidos (Juliana e Ana) por Rodrigo: \n`)
+console.log(alunosSubstituidos)
+
+//array modificado
+console.log(`Array alunos modificado \n`)
+console.log(alunos)
 
 
 //concatenando arrays
@@ -52,6 +67,7 @@ const salajs2 = ["Juliana", "Leo"," Raquel"]
 
 const salasUnificadas = salajs.concat(salajs2)
 
+console.log(`Salas unificadas \n`)
 console.log(salasUnificadas)
 
 
@@ -63,13 +79,16 @@ const mediasAlunos = [10,8,7.5,9]
 
 const mixAlunosmedias = [alunosLista,  mediasAlunos]
 
-console.log( `O aluno na primeira lista e na primeira posição é: ${mixAlunosmedias[0][1]}e a nota dela é: ${mixAlunosmedias[1][0]}`)
+
+console.log(`mixAlunos junção de arrays:`)
+console.log(mixAlunosmedias)
+
+console.log( `O aluno na primeira lista e na primeira posição é: ${mixAlunosmedias[0][1]} e a nota dela é: ${mixAlunosmedias[1][0]}`)
 
 
 // - Procurando itens na lista
 
 const alunosLista1 = ["João","Juliana","Caio","Ana"]
-
 const mediasAlunos1 = [10,8,7.5,9]
 
 const mixAlunosmedias1 = [alunosLista1,  mediasAlunos1]
