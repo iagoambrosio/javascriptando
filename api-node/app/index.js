@@ -34,7 +34,7 @@ const versaoApi ='/api/v1'
  Express.get(`${versaoApi}`, function(req,res){
      //response
      res.json({
-         mensagem: 'Gostosa'
+         voce_é : 'gostosa'
      })
  
  })

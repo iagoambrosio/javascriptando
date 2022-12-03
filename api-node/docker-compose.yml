@@ -10,17 +10,17 @@ services:
     ports:
       - 27017
     networks:
-      - net_api
+      - projeto_php
   node:
     image: node
     working_dir: /app
     volumes:
-      - .:/app
+      - ./app:/app
     ports:
       - 3000:3000
     networks:
-      - net_api
+      - projeto_php
     entrypoint: "npm start"
 networks:
-  net_api:
+  projeto_php:
     driver: bridge  
