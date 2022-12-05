@@ -2,35 +2,26 @@
 const router = require('express').Router()
 // chama o objeto exportado em Person.js
 const Person = require('../models/Person.js')
-//Versão API
-const versaoApi ='/api/v1'
-
-
-
+ 
 //Rotas GET
  router.get("/person", async (req,res) =>{
-     //response
-  try {
-    const people = Person.find()
-    res.status(200).json(people)
-  }
-  catch (error){
-    res.status(500).json({error: error})
-  }
- 
- })
-
- router.get("/v1", function(req,res){
+    console.log(res.body) 
     //response
-    res.json({"eita": "ola"})
+  try {
+    const people = await Person.find()
+    res.status(200).json(people) 
+    }
 
-})
+    catch (error) { 
+        res.status(500).json({error: error}) 
+    }
+ })
 
 // Rostas POST
 
-// curl -X POST -H "Content-Type: application/json" -d '{"name" : "João", "salary" : 2000, "approved" : true }' https://devopers.ddns.net/api/v1/person
+// curl -X POST -H "Content-Type: application/json" -d '{"name" : "João", "salary" : 2000, "approved" : true }' https://devopers.ddns.net/person
 router.post(`/person`, async (req,res) => {
-
+    console.log(req.body)
     // req.body
     // {name: "Matheus", salary: 5000, approved: false }
     
