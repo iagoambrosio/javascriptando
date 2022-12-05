@@ -19,7 +19,7 @@ Express.use(
     )
 ) 
 
-Express.use(`/`, personRoutes)
+Express.use(`/person`, personRoutes)
 
  // disponibilizar porta e fixa ip na em todas as interfaces
  Express.listen(3000)
