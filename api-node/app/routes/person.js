@@ -4,8 +4,7 @@ const router = require('express').Router()
 const Person = require('../models/Person.js')
  
 //Rotas GET
- router.get("/", async (req,res) =>{
-    console.log(res.body) 
+ router.get("/person", async (req,res) =>{ 
     //response
   try {
     const people = await Person.find()
@@ -15,11 +14,11 @@ const Person = require('../models/Person.js')
     catch (error) { 
         res.status(500).json({error: error}) 
     }
+    console.log(req.headers)
  })
 
- router.get('/:id', async (req, res)=>{
+ router.get('/person/:id', async (req, res)=>{
   //Extrair dados de acordo com a requisição solicitada req.params.id = id do banco do mongodb
-  console.log(req.params.id)
   const id = req.params.id
 //findOne, utilizado para retornar um resultado do banco
   try {
@@ -29,12 +28,13 @@ const Person = require('../models/Person.js')
   catch (error){
     res.status(500).json({error: error})
   }
-
+  console.log('Parametro da Requisição: '+req.params.id)
+  console.log(req.headers)
  })
 
 // Rostas POST
 // curl -X POST -H "Content-Type: application/json" -d '{"name" : "João", "salary" : 2000, "approved" : true }' https://devopers.ddns.net/person
-router.post(`/`, async (req,res) => {
+router.post(`/person`, async (req,res) => {
     console.log(req.body)
     // req.body
     // {name: "Matheus", salary: 5000, approved: false }
@@ -44,7 +44,7 @@ router.post(`/`, async (req,res) => {
     //Validação se o usuário enviou um nome
     if(!name){
         res.status(422).json({
-            Mensagem : "Usuário não encontrado"
+            Mensagem : "Parâmetro nome é obrigatório"
         })
         return
     }
@@ -67,7 +67,7 @@ router.post(`/`, async (req,res) => {
         //caso tenha algum problema, ele devolve os erros
         res.status(500).json({error: error})
     }
-
+    console.log(req.headers)
 })
 
 //rotas UPDATE
@@ -80,6 +80,7 @@ router.patch('/:id', async (req,res) => {
     } catch(error){
         res.status(500).json({error: error})
 }
+console.log(req.headers)
 })
 
 module.exports = router
