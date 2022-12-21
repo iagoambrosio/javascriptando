@@ -11,14 +11,15 @@ const arrayRandominize = (numero) => {
     return resultado
 }
 
-const escolhaArray = arrayRandominize(25)
+const escolhaArray = arrayRandominize(100)
 
-console.log("Primerio " + escolhaArray)
+console.log("Numero para escolha do array: " + escolhaArray)
 
-if (escolhaArray <= 13 )
+if (escolhaArray <= 50 )
 {
+  console.log("Escolha da consoante:"+consoante[arrayRandominize(consoante.length)])
     //chose consoante
-   const escolhaPalavra = Math.floor(Math.random()*(10 - 3) + 3)
+   const escolhaPalavra = Math.floor(Math.random()*(12 - 3) + 3)
    console.log("Numero de letras na palavra: "+ escolhaPalavra)
 
    let i = 0
@@ -31,16 +32,29 @@ if (escolhaArray <= 13 )
    }else{
    console.log("Segunda letra: "+vogal[arrayRandominize(vogal.length)])
    ++ i
-}
+  }
+
 }
 
 } else {
   //chose vogal
-    console.log(vogal[arrayRandominize(vogal.length)]) 
-}
+    console.log("Escolha da vogal:"+vogal[arrayRandominize(vogal.length)])
 
-
-
+    const escolhaPalavra = Math.floor(Math.random()*(10 - 3) + 3)
+    console.log("Numero de letras na palavra: "+ escolhaPalavra)
+ 
+    let i = 0
+    while ( i < escolhaPalavra ){
+    
+     console.log("Primeira letra: "+consoante[arrayRandominize(consoante.length)])
+    ++ i
+    if (i === escolhaPalavra){
+     return console.log("i e escolhaPalavra são iguais "+i+" e "+escolhaPalavra)
+    }else{
+    console.log("Segunda letra: "+vogal[arrayRandominize(vogal.length)])
+    ++ i
+      }
+    }
 // pessoAleatoria.
-
+  }
 }
