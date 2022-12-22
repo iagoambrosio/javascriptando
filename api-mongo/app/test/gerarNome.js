@@ -1,60 +1,50 @@
-'use strict' 
-for (let i = 0; i < 1; i++) {
-const pessoAleatoria = "nome"
+'use strict'
+function gerarNomes(rounds,tamanhoNome,minimoLetras){
+for (let i = 0; i < rounds; i++) {
 const consoante = ["b","c","d","f","g","h","i","j","k","l","m","n","p","q","r","s","t","v","x","y","z"]
 const vogal = ["a","e","i","o","u"]
-
-
-// Decidir qual array
-const arrayRandominize = (numero) => {
-    const resultado = Math.floor(Math.random()*numero)
+// função principal
+function mainGerarNome(){
+  const nomeGerado = {
+    "toUperCaseOnString" : null,
+    "onString" : null,
+    "onArray" : [],
+    "toUperCaseOnArray" : []
+  }
+  const arrayRandominize = (max,min) => {
+    const resultado = Math.floor(Math.random()*(max - min) + min)
     return resultado
 }
-
-const escolhaArray = arrayRandominize(100)
-
-console.log("Numero para escolha do array: " + escolhaArray)
-
-if (escolhaArray <= 50 )
-{
-  console.log("Escolha da consoante:"+consoante[arrayRandominize(consoante.length)])
-    //chose consoante
-   const escolhaPalavra = Math.floor(Math.random()*(12 - 3) + 3)
-   console.log("Numero de letras na palavra: "+ escolhaPalavra)
-
+function escolhArray(){
+  const decisor = arrayRandominize(100,0)
+  if (decisor >=50){
+    return consoante
+  } else { return vogal }
+}
+const arrayEscolhido = escolhArray()
+function arrayQueRestou(){if (arrayEscolhido === vogal){
+  return consoante 
+} else {return vogal}}
+const segundoArray = arrayQueRestou()
+   //Determinando o tamanho da palavra
+   const escolhaPalavra = arrayRandominize(tamanhoNome,minimoLetras)
    let i = 0
    while ( i < escolhaPalavra ){
-   
-    console.log("Primeira letra: "+consoante[arrayRandominize(consoante.length)])
+   const primeiraLetra = arrayEscolhido[arrayRandominize(arrayEscolhido.length,0)]
+   nomeGerado.onArray.push(primeiraLetra)
    ++ i
    if (i === escolhaPalavra){
-    return console.log("i e escolhaPalavra são iguais "+i+" e "+escolhaPalavra)
+   break
    }else{
-   console.log("Segunda letra: "+vogal[arrayRandominize(vogal.length)])
+   const segundaLetra = segundoArray[arrayRandominize(segundoArray.length,0)]
+   nomeGerado.onArray.push(segundaLetra)
    ++ i
   }
-
 }
-
-} else {
-  //chose vogal
-    console.log("Escolha da vogal:"+vogal[arrayRandominize(vogal.length)])
-
-    const escolhaPalavra = Math.floor(Math.random()*(10 - 3) + 3)
-    console.log("Numero de letras na palavra: "+ escolhaPalavra)
- 
-    let i = 0
-    while ( i < escolhaPalavra ){
-    
-     console.log("Primeira letra: "+consoante[arrayRandominize(consoante.length)])
-    ++ i
-    if (i === escolhaPalavra){
-     return console.log("i e escolhaPalavra são iguais "+i+" e "+escolhaPalavra)
-    }else{
-    console.log("Segunda letra: "+vogal[arrayRandominize(vogal.length)])
-    ++ i
-      }
-    }
-// pessoAleatoria.
-  }
+nomeGerado.onString = nomeGerado.onArray.toString()
+return console.log(nomeGerado)
 }
+mainGerarNome()
+  } 
+}
+gerarNomes(2,12,4)
