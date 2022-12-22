@@ -1,5 +1,6 @@
 'use strict'
 function gerarNomes(rounds, tamanhoNome, minimoLetras) {
+  //tentar dar um return prematuro aqui
   for (let i = 0; i < rounds; i++) {
     const consoante = ["b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "x", "y", "z"]
     const vogal = ["a", "e", "i", "o", "u"]
@@ -8,10 +9,9 @@ function gerarNomes(rounds, tamanhoNome, minimoLetras) {
       const nomeGerado = {
         "arrayescolhido": null,
         "decisor": null,
-        "toUperCaseOnString": null,
+        "toUpperCaseOnString": null,
         "onString": null,
         "onArray": [],
-        "toUperCaseOnArray": []
       }
       const arrayRandominize = (tamanhoNome, minimoLetras) => {
         const resultado = Math.floor(Math.random() * (tamanhoNome - minimoLetras) + minimoLetras)
@@ -49,9 +49,10 @@ function gerarNomes(rounds, tamanhoNome, minimoLetras) {
         ++i
       }
       nomeGerado.onString = nomeGerado.onArray.toString()
+      nomeGerado.toUpperCaseOnString = nomeGerado.onString.charAt(0).toUpperCase()+nomeGerado.onString.slice(1)
       return nomeGerado
     }
     console.log(mainGerarNome())
   }
 }
-gerarNomes(2, 12, 4)
+gerarNomes(1, 12, 4)
