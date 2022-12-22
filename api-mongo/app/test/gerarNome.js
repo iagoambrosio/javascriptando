@@ -9,9 +9,10 @@ function gerarNomes(rounds, tamanhoNome, minimoLetras) {
       const nomeGerado = {
         "arrayescolhido": null,
         "decisor": null,
-        "toUpperCaseOnString": null,
+        "tamanhodapalavra": null,
         "onString": null,
         "onArray": [],
+        "toUpperCaseOnString": null,
       }
       const arrayRandominize = (tamanhoNome, minimoLetras) => {
         const resultado = Math.floor(Math.random() * (tamanhoNome - minimoLetras) + minimoLetras)
@@ -48,8 +49,12 @@ function gerarNomes(rounds, tamanhoNome, minimoLetras) {
         }
         ++i
       }
+      //gerar uma string através de um array
       nomeGerado.onString = nomeGerado.onArray.toString()
+      //gerar uma string com a primeira letra maiuscula
       nomeGerado.toUpperCaseOnString = nomeGerado.onString.charAt(0).toUpperCase()+nomeGerado.onString.slice(1)
+      //gerar um array a partir de uma string separado por virgula
+      nomeGerado.toUpperCaseOnArray = nomeGerado.toUpperCaseOnString.split(',')
       return nomeGerado
     }
     console.log(mainGerarNome())
