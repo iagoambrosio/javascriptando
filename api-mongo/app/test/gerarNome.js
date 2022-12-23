@@ -1,5 +1,4 @@
 'use strict'
-let variavelSaida = null
 function gerarNomes(rounds, tamanhoNome, minimoLetras,vairavelSaida) {
   //tentar dar um return prematuro aqui
   for (let i = 0; i < rounds; i++) {
@@ -58,8 +57,8 @@ function gerarNomes(rounds, tamanhoNome, minimoLetras,vairavelSaida) {
       nomeGerado.toUpperCaseOnArray = nomeGerado.toUpperCaseOnString.split(',')
       return nomeGerado
     }
-    variavelSaida = mainGerarNome()
+    return mainGerarNome()
   }
 }
-gerarNomes(1, 12, 4)
-console.log(variavelSaida)
+let ue = gerarNomes(1, 12, 4)
+console.log(ue)
