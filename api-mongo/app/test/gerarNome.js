@@ -1,5 +1,5 @@
 'use strict'
-function gerarNomes(rounds, tamanhoNome, minimoLetras,vairavelSaida) {
+export function gerarNomes(rounds, tamanhoNome, minimoLetras) {
   //tentar dar um return prematuro aqui
   for (let i = 0; i < rounds; i++) {
     const consoante = ["b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "x", "y", "z"]
@@ -55,10 +55,12 @@ function gerarNomes(rounds, tamanhoNome, minimoLetras,vairavelSaida) {
       nomeGerado.toUpperCaseOnString = nomeGerado.onString.charAt(0).toUpperCase()+nomeGerado.onString.slice(1)
       //gerar um array a partir de uma string separado por virgula
       nomeGerado.toUpperCaseOnArray = nomeGerado.toUpperCaseOnString.split(',')
+      //sanitizar Uppercase string, tirar virgula com regex
+      nomeGerado.toUpperCaseOnString = nomeGerado.toUpperCaseOnString.replace(/,/g,"")
+      // replace
+      nomeGerado.onString = nomeGerado.onString.replace(/,/g,"")
       return nomeGerado
     }
     return mainGerarNome()
   }
 }
-let ue = gerarNomes(1, 12, 4)
-console.log(ue)
