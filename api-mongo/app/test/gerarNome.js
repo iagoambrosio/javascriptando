@@ -1,5 +1,6 @@
 'use strict'
-function gerarNomes(rounds, tamanhoNome, minimoLetras) {
+let variavelSaida = null
+function gerarNomes(rounds, tamanhoNome, minimoLetras,vairavelSaida) {
   //tentar dar um return prematuro aqui
   for (let i = 0; i < rounds; i++) {
     const consoante = ["b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "x", "y", "z"]
@@ -57,7 +58,8 @@ function gerarNomes(rounds, tamanhoNome, minimoLetras) {
       nomeGerado.toUpperCaseOnArray = nomeGerado.toUpperCaseOnString.split(',')
       return nomeGerado
     }
-    console.log(mainGerarNome())
+    variavelSaida = mainGerarNome()
   }
 }
 gerarNomes(1, 12, 4)
+console.log(variavelSaida)
