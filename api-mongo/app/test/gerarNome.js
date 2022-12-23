@@ -2,7 +2,7 @@
 export function gerarNomes(rounds, tamanhoNome, minimoLetras) {
   //tentar dar um return prematuro aqui
   for (let i = 0; i < rounds; i++) {
-    const consoante = ["b", "c", "d", "f", "g", "h", "i", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "x", "y", "z"]
+    const consoante = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "x", "y", "z"]
     const vogal = ["a", "e", "i", "o", "u"]
     // função principal
     function mainGerarNome() {
@@ -28,7 +28,7 @@ export function gerarNomes(rounds, tamanhoNome, minimoLetras) {
       const arrayEscolhido = escolhArray()
       nomeGerado.arrayescolhido = arrayEscolhido
       function arrayQueRestou() {
-        if (arrayEscolhido == vogal) {
+        if (arrayEscolhido === vogal) {
           return consoante
         } else { return vogal }
       }
@@ -46,8 +46,8 @@ export function gerarNomes(rounds, tamanhoNome, minimoLetras) {
         } else {
           const segundaLetra = segundoArray[arrayRandominize(segundoArray.length, 0)]
           nomeGerado.onArray.push(segundaLetra)
+          ++i
         }
-        ++i
       }
       //gerar uma string através de um array
       nomeGerado.onString = nomeGerado.onArray.toString()
