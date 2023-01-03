@@ -1,5 +1,4 @@
-'use strict'
-import { gerarNomes } from './gerarNome.js';
+const gerarNomes = require('./gerarNome.js')
 
 let contadorClientes = 0
 let arrayFinal = []
@@ -18,7 +17,7 @@ class Cliente {
     incremento(){
         return contadorClientes++ }
 }
-function gerarCadastro(rounds) {
+function gerarCadastros(rounds) {
 for (let i = 0 ;i < rounds; i++){
 let obj = {}
 let cliente = new Cliente (
@@ -34,7 +33,6 @@ obj = cliente
 arrayFinal.push(obj)
 cliente.incremento()
 }
-return 0
+return arrayFinal
 }
-gerarCadastro(1)
-console.log(arrayFinal)
+module.exports = gerarCadastros

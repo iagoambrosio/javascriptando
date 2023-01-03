@@ -1,10 +1,10 @@
 //Exporta express
-const router = require('express').Router()
+const roteador = require('express').Router()
 // chama o objeto exportado em Person.js
 const Person = require('../models/Person.js')
  
 //Rotas GET
- router.get("/person", async (req,res) =>{ 
+ roteador.get("/person", async (req,res) =>{ 
     //response
   try {
     const people = await Person.find()
@@ -17,7 +17,7 @@ const Person = require('../models/Person.js')
     console.log(req.headers)
  })
 
- router.get('/person/:id', async (req, res)=>{
+ roteador.get('/person/:id', async (req, res)=>{
   //Extrair dados de acordo com a requisição solicitada req.params.id = id do banco do mongodb
   const id = req.params.id
 //findOne, utilizado para retornar um resultado do banco
@@ -34,7 +34,7 @@ const Person = require('../models/Person.js')
 
 // Rostas POST
 // curl -X POST -H "Content-Type: application/json" -d '{"name" : "João", "salary" : 2000, "approved" : true }' https://devopers.ddns.net/person
-router.post(`/person`, async (req,res) => {
+  roteador.post(`/person`, async (req,res) => {
     console.log(req.body)
     // req.body
     // {name: "Matheus", salary: 5000, approved: false }
@@ -72,7 +72,7 @@ router.post(`/person`, async (req,res) => {
 
 //rotas UPDATE
 
-router.patch('/:id', async (req,res) => {
+roteador.patch('/:id', async (req,res) => {
     console.log(req.body)
     const person = await Person.findOne({_id : id})
     try {
@@ -83,4 +83,4 @@ router.patch('/:id', async (req,res) => {
 console.log(req.headers)
 })
 
-module.exports = router
+module.exports = roteador

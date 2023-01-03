@@ -16,9 +16,9 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./ ./home/node/app
+      - ./app:/home/node/app
     ports:
-      - 80:3000
+      - 3000:3000
     networks:
       - api
 networks:

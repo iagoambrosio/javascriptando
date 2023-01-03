@@ -1,5 +1,5 @@
-'use strict'
-export function gerarNomes(rounds, tamanhoNome, minimoLetras) {
+
+function gerarNomes(rounds, tamanhoNome, minimoLetras) {
   //tentar dar um return prematuro aqui
   for (let i = 0; i < rounds; i++) {
     const consoante = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "x", "y", "z"]
@@ -64,3 +64,4 @@ export function gerarNomes(rounds, tamanhoNome, minimoLetras) {
     return mainGerarNome()
   }
 }
+module.exports = gerarNomes

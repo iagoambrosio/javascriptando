@@ -12,6 +12,9 @@ const mongodbservice = require('./models/Conectar.js')
 //chama a função de personRoutes
 const personRoutes = require('./routes/person.js')
 
+//biblioteca de test
+const gerarPerson = require('./routes/gerarPerson.js')
+
 // chama o modulo de caminho
 const path = require('path')
 
@@ -30,6 +33,7 @@ Express.get('/', (req,res)=>{
     res.sendFile(path.join(__dirname,'index.html'))
 })
 Express.use(`/`, personRoutes)
+Express.use(`/test`, gerarPerson)
 
 
  // disponibilizar porta e fixa ip na em todas as interfaces
