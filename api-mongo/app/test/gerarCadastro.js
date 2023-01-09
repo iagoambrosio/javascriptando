@@ -17,7 +17,7 @@ class Cliente {
     incremento(){
         return contadorClientes++ }
 }
-function gerarCadastros(rounds) {
+function gerarCadastros(rounds){
 for (let i = 0 ;i < rounds; i++){
 let obj = {}
 let cliente = new Cliente (
@@ -33,6 +33,9 @@ obj = cliente
 arrayFinal.push(obj)
 cliente.incremento()
 }
-return arrayFinal
+const resposta = arrayFinal
+arrayFinal = []
+contadorClientes = 0
+return resposta
 }
 module.exports = gerarCadastros
