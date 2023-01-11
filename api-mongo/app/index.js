@@ -10,10 +10,10 @@ const Express = express()
 const mongodbservice = require('./models/Conectar.js')
 
 //chama a função de personRoutes
-const personRoutes = require('./routes/person.js')
+const personRoutes = require('./routes/persons.js')
 
 //biblioteca de test
-const gerarPerson = require('./routes/users.js')
+const gerarPerson = require('./routes/clientes.js')
 
 // chama o modulo de caminho
 const path = require('path')

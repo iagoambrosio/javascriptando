@@ -3,8 +3,7 @@ const gerarNomes = require('./gerarNome.js')
 let contadorClientes = 0
 let arrayFinal = []
 class Cliente {
-    constructor(id,nome,sobrenome,email,telefone,cep){
-        this.id = id
+    constructor(nome,sobrenome,email,telefone,cep){
         this.nome = nome 
         this.sobrenome = sobrenome 
         this.email = email
@@ -21,7 +20,6 @@ function gerarCadastros(rounds){
 for (let i = 0 ;i < rounds; i++){
 let obj = {}
 let cliente = new Cliente (
-    contadorClientes,
     gerarNomes(1,10,4).toUpperCaseOnString,
     gerarNomes(1,14,4).toUpperCaseOnString,
     undefined,
@@ -31,7 +29,6 @@ let cliente = new Cliente (
 cliente.email = cliente.nome.toLowerCase()+"."+cliente.sobrenome.toLowerCase()+"@"+gerarNomes(1,16,5).onString+".com"
 obj = cliente
 arrayFinal.push(obj)
-cliente.incremento()
 }
 const resposta = arrayFinal
 arrayFinal = []
