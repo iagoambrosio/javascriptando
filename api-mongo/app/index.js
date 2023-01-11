@@ -13,7 +13,7 @@ const mongodbservice = require('./models/Conectar.js')
 const personRoutes = require('./routes/person.js')
 
 //biblioteca de test
-const gerarPerson = require('./routes/gerarPerson.js')
+const gerarPerson = require('./routes/users.js')
 
 // chama o modulo de caminho
 const path = require('path')

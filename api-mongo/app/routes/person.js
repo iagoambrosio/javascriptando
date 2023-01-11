@@ -33,7 +33,7 @@ const Person = require('../models/Person.js')
  })
 
 // Rostas POST
-// curl -X POST -H "Content-Type: application/json" -d '{"name" : "João", "salary" : 2000, "approved" : true }' https://devopers.ddns.net/person
+// curl -X POST -H "Content-Type: application/json" -d '{"name" : "João", "salary" : 2000, "approved" : true }' http://localhost:3000/person
   roteador.post(`/person`, async (req,res) => {
     console.log(req.body)
     // req.body
@@ -78,7 +78,7 @@ roteador.patch('/:id', async (req,res) => {
     try {
         Person.updateOne()
     } catch(error){
-        res.status(500).json({error: error})
+        res.status(500).json({error})
 }
 console.log(req.headers)
 })

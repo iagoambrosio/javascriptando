@@ -1,10 +1,10 @@
 const gerarCadastros =  require('../test/gerarCadastro.js')
 const roteador = require('express').Router()
 
-roteador.get('/gerarpessoa', async (req,res)=>{
+roteador.get('/users', async (req,res)=>{
     try {
-        const {cnt} = req.query;
-        const gerarpessoa = gerarCadastros(cnt)
+        const {qnt} = req.query;
+        const gerarpessoa = gerarCadastros(qnt)
         res.status(200).json(gerarpessoa)
         console.log(req.query) 
     }
