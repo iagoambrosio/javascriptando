@@ -27,17 +27,8 @@ roteador.get('/cliente', async (req,res)=>{
     }
 
 )
-
-roteador.get('/clientes', async (req,res)=>{
-    try{   
-        res.status(200).json(await Cliente.find())
-}
-        catch (error) { 
-            res.status(500).json({error: error}) 
-        }
-})
-//curl -X POST -H "Content-Type: application/json" -d '{"nome": "Raul" ,"sobrenome": "Jefferson" ,"email": "dsadasd@dusahdhsau.com" ,"telefone": 142341341 ,"cep": 1541254215}' http://localhost:3000/test/clientes
-roteador.post('/clientes', async (req,res)=>
+//curl -X POST -H "Content-Type: application/json" -d '{"nome": "Raul" ,"sobrenome": "Jefferson" ,"email": "dsadasd@dusahdhsau.com" ,"telefone": 142341341 ,"cep": 1541254215}' http://localhost:3000/test/cliente
+roteador.post('/cliente', async (req,res)=>
 {
     const {nome,sobrenome,email,telefone,cep} = req.body
 
@@ -66,15 +57,6 @@ roteador.post('/clientes', async (req,res)=>
     }
 }
 )
-roteador.delete('/clientes', async (req,res)=> {
-    try{
-        await Cliente.deleteMany(req.query)
-        res.status(200).send(JSON.stringify(req.query)+" Deletado !!")
-    }
-    catch(error){
-        res.status(500).json({error})
-    }
-})
 roteador.delete('/cliente/:id', async (req,res)=> {
     const id = req.params.id
     try{
@@ -86,5 +68,22 @@ roteador.delete('/cliente/:id', async (req,res)=> {
     res.status(500).json({error : error})
     }
 })
+roteador.get('/clientes', async (req,res)=>{
+    try{   
+        res.status(200).json(await Cliente.find())
+}
+        catch (error) { 
+            res.status(500).json({error: error}) 
+        }
+})
 
+roteador.delete('/clientes', async (req,res)=> {
+    try{
+        await Cliente.deleteMany(req.query)
+        res.status(200).send(JSON.stringify(req.query)+" Deletado !!")
+    }
+    catch(error){
+        res.status(500).json({error})
+    }
+})
 module.exports = roteador
