@@ -62,7 +62,7 @@ roteador.delete('/cliente/:id', async (req,res)=> {
     try{
     const clienteid = await Cliente.deleteOne({_id : id})
 
-    res.status(200).json(clienteid,{message: "Deletado"})
+    res.status(200).json({message: "Deletado"})
     }
     catch(error){
     res.status(500).json({error : error})
