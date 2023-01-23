@@ -1,27 +1,21 @@
-const gerarCadastros =  require('../test/gerarCadastro.js')
+const gerarCadastros =  require('../test/testecad')
 const roteador = require('express').Router()
 const Cliente = require('../models/Cliente');
 const { exists, findOne } = require('../models/Cliente');
 const { response } = require('express');
 
 //deserves /test and btwen the routes
+//curl "http://localhost/test/cliente?qnt=30&tmn=15&minim=4" # test get
 roteador.get('/cliente', async (req,res)=>{
 
-    function geracao(qnt){
-    const gerarpessoa = gerarCadastros(qnt)
-    Cliente.create(gerarpessoa)
-    return gerarpessoa}
+    const randomUser = new gerarCadastros
 
-    try {
-        if (!req.query.qnt){
-            console.log("ue"+req.query)
-            res.status(200).json(geracao(1))
-        }
-        else {
-            res.status(200).json(geracao(req.query.qnt))
-        }
+    try { const usergen = randomUser.gerarCadastros(Number(req.query.qnt),Number(req.query.tmn),Number(req.query.minim))
+        res.status(200).json(usergen)
+               
     }catch (error) { 
-            res.status(500).json({error}) 
+            res.status(500).json({error : error}) 
+            console.log("nao foi") 
         }
 
     }
