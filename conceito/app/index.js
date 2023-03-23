@@ -3,11 +3,11 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true})) 
-const moduler = require('./routes/gets.js')
-const mainPaths = ["/main","/edit","/user"]
+const moduler = require('./routes/methods')
+const mainPaths = ["/main","/edit","/user","/kudo","/inventory"]
 // a nível de rota, o use recebe o caminho e manda para o Route do express
-app.use(mainPaths, moduler)
 app.post(mainPaths, moduler)
+app.use(mainPaths, moduler)
 app.put(mainPaths, moduler)
 app.options(mainPaths, moduler)
 app.delete(mainPaths, moduler)
