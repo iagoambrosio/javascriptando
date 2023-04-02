@@ -1,0 +1,26 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    hostname: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin 
+      - MONGO_INITDB_ROOT_PASSWORD=123456 
+      - MONGO_INITDB_DATABASE=db_js 
+    ports:
+      - 27017
+    networks:
+      - api
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/home/node/
+    ports:
+      - 3000:3000
+    networks:
+      - api
+networks:
+  api:
+    driver: bridge  
