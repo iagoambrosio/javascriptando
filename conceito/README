@@ -1,0 +1,6 @@
+## Uma api conceitual
+
+Neste repositório minha intenção é escrever uma api com o mínimo de código possível, 
+para solucionar a questão daquele tanto de rotas definidas em arquivos diferente, utilizarei os seguintes parametros.
+
+- Variáveis para designar o ambiente, sendo produção, teste e desenvolvimento
