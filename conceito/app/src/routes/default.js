@@ -7,9 +7,8 @@ roteador.get(subpaths,(req,res)=>{
     res.status(200).json({caminho:`From GET to / `})
 })
 roteador.post(subpaths,(req,res)=>{
-    console.log(req.body)
+    console.log("IP:",req.ip,"Body:",req.body)
     const {name,email,password} = req.body
-
     if (!name || !password || !email){
             res.status(400).json({
              message : `Parametro nome ${req.body} é obrigatório`
