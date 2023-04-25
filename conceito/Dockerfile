@@ -10,4 +10,6 @@ RUN npm install
 
 COPY --chown=node . .
 
+ENV DATABASE_URL="mysql://root:mysqladmin@mysql:3306/api_db"
+
 ENTRYPOINT npm start

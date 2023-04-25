@@ -1,14 +1,15 @@
 version: '3'
 services:
-  mongo:
-    image: mongo
-    hostname: mongodb
+  mysql:
+    image: mysql:8.0.33
+    hostname: mysql
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=mongoadmin 
-      - MONGO_INITDB_ROOT_PASSWORD=123456 
-      - MONGO_INITDB_DATABASE=db_js 
+      - MYSQL_ROOT_PASSWORD=mysqladmin
+      - MYSQL_USER=nodeapi
+      - MYSQL_PASSWORD=uadareu1234437
+      - MYSQL_DATABASE=api_db
     ports:
-      - 27017
+      - 3306:3306
     networks:
       - api
   node:
