@@ -19,8 +19,8 @@ model Tenant {
   updated_at DateTime @updatedAt
   
   users User[] 
-  
-  @@map('tenant')
+  apllication  Application[]
+  @@map("tenant")
 } 
 
 model User { 
@@ -45,6 +45,6 @@ model Application {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  data json
+  data Json
   @@map("application")
 }
