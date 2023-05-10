@@ -1,0 +1,399 @@
+Para criar uma API TypeScript com Jest e Express, você pode seguir os seguintes passos:
+
+Crie um novo projeto TypeScript usando o comando 
+npm init
+ e instale as dependências necessárias:
+Copy codenpm init -y
+npm install express jest @types/express @types/jest ts-jest typescript
+Crie um arquivo 
+tsconfig.json
+ na raiz do projeto com as seguintes configurações:
+Copy code{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
+Crie uma pasta 
+src
+ na raiz do projeto e crie um arquivo 
+index.ts
+ com o seguinte código:
+Copy codeimport express from 'express';
+
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello
+
+continue
+
+
+Para adicionar rotas à sua API, você pode criar um novo arquivo na pasta 
+src
+ com o nome da rota desejada, por exemplo 
+users.ts
+. Nesse arquivo, você pode definir as rotas para a rota 
+/users
+. Por exemplo:
+Copy codeimport express from 'express';
+
+const router = express.Router();
+
+router.get('/', (req, res) => {
+  res.send('List of users');
+});
+
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  res.send(`User with id ${id}`);
+});
+
+export default router;
+Em seguida, você pode importar e usar essa rota no arquivo 
+index.ts
+ da seguinte maneira:
+Copy codeimport express from 'express';
+import usersRouter from './users';
+
+const app = express();
+
+app.use('/users', usersRouter);
+
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
+
+export default app;
+Para testar as rotas, você pode criar novos testes na pasta 
+tests
+. Por exemplo:
+Copy codeimport request from 'supertest';
+import app from '../src/index';
+
+describe('Test the root path', () => {
+  test('It should response the GET method', async () => {
+    const response = await request(app).get('/');
+    expect(response.status).toBe(200);
+    expect(response.text).toBe('Hello World!');
+  });
+});
+
+describe('Test the users path', () => {
+  test('It should response the GET method', async () => {
+    const response = await request(app).get('/users');
+    expect(response.status).toBe(200);
+    expect(response.text).toBe('List of users');
+  });
+
+  test('It should response the GET method with id parameter', async () => {
+    const response = await request(app).get('/users/123');
+    expect(response.status).toBe(200);
+    expect(response.text).toBe('User with id 123');
+  });
+});
+Execute o comando 
+npm run test
+ para executar os novos testes.
+Com esses passos, você terá adicionado rotas à sua API TypeScript com Jest e Express e testado essas rotas.
+
+Paraicionar o Prisma ao projeto, você pode seguir os seguintesos:
+
+Instale o Prisma CLI globalmente usando o comando 
+npm install -g prisma
+.
+
+Crie um novo arquivo 
+schema.prisma
+ na raiz do projeto com o seguinte código:
+
+Copy codedatasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orders    Order[]
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  price       Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Order {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+  products    Product[]
+}
+Execute o comando 
+npx prisma migrate dev
+ para criar as tabelas no banco de dados.
+
+Crie um arquivo 
+prisma.ts
+ na pasta 
+src
+ com o seguinte código:
+
+Copy codeimport { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+export default prisma;
+Crie um arquivo 
+user.repository.ts
+ na pasta 
+src
+ com o seguinte código:
+Copy codeimport prisma from '../prisma';
+
+export const createUser = async (data: any) => {
+  return prisma.user.create({ data });
+};
+
+export const updateUser = async (id: number, data: any) => {
+  return prisma.user.update({ where: { id }, data });
+};
+
+export const deleteUser = async (id: number) => {
+  return prisma.user.delete({ where: { id } });
+};
+
+export const getUserById = async (id: number) => {
+  return prisma.user.findUnique({ where: { id } });
+};
+
+export const getUsers = async () => {
+  return prisma.user.findMany();
+};
+Crie um arquivo 
+product.repository.ts
+ na pasta 
+src
+ com o seguinte código:
+Copy codeimport prisma from '../prisma';
+
+export const createProduct = async (data: any) => {
+  return prisma.product.create({ data });
+};
+
+export const updateProduct = async (id: number, data: any) => {
+  return prisma.product.update({ where: { id }, data });
+};
+
+export const deleteProduct = async (id: number) => {
+  return prisma.product.delete({ where: { id } });
+};
+
+export const getProductById = async (id: number) => {
+  return prisma.product.findUnique({ where: { id } });
+};
+
+export const getProducts = async () => {
+  return prisma.product.findMany();
+};
+Crie um arquivo 
+order.repository.ts
+ na pasta 
+src
+ com o seguinte código:
+Copy codeimport prisma from '../prisma';
+
+export const createOrder = async (data: any) => {
+  return prisma.order.create({ data });
+};
+
+export const updateOrder = async (id: number, data: any) => {
+  return prisma.order.update({ where: { id }, data });
+};
+
+export const deleteOrder = async (id: number) => {
+  return prisma.order.delete({ where: { id } });
+};
+
+export const getOrderById = async (id: number) => {
+  return prisma.order.findUnique({ where: { id } });
+};
+
+export const getOrders = async () => {
+  return prisma.order.findMany();
+};
+Crie um arquivo 
+user.controller.ts
+ na pasta 
+src
+ com o seguinte código:
+Copy codeimport { Request, Response } from 'express';
+import * as userRepository from '../repositories/user.repository';
+
+export const createUser = async (req: Request, res: Response) => {
+  const { name, email, password } = req.body;
+  const user = await userRepository.createUser({ name, email, password });
+  res.json(user);
+};
+
+export const updateUser = async (req: Request, res: Response) => {
+    const { id } = req.params;
+const user = await userRepositoryById(Number(id));
+res.json(user);
+};
+
+export const getUsers = async (req: Request, res: Response) => {
+const users = await userRepository.getUsers();
+res.json(users);
+};
+
+Copy code9. Crie um arquivo `product.controller.ts` na pasta `src` com o seguinte código:
+import { Request, Response } from 'express';
+import * as productRepository from '../repositories/product.repository';
+
+export const createProduct = async (req: Request, res: Response) => {
+const { name, description, price } = req.body;
+const product = await productRepository.createProduct({ name, description, price });
+res.json(product);
+};
+
+export const updateProduct = async (req: Request, res: Response) => {
+const { id } = req.params;
+const { name, description, price } = req.body;
+const product = await productRepository.updateProduct(Number(id), { name, description, price });
+res.json(product);
+};
+
+export const deleteProduct = async (req: Request, res: Response) => {
+const { id } = req.params;
+await productRepository.deleteProduct(Number(id));
+res.sendStatus(204);
+};
+
+export const getProductById = async (req: Request, res: Response) => {
+const { id } = req.params;
+const product = await productRepository.getProductById(Number(id));
+res.json(product);
+};
+
+export const getProducts = async (req: Request, res: Response) => {
+const products = await productRepository.getProducts();
+res.json(products);
+};
+
+Copy code10. Crie um arquivo `order.controller.ts` na pasta `src` com o seguinte código:
+import { Request, Response } from 'express';
+import * as orderRepository from '../repositories/order.repository';
+
+export const createOrder = async (req: Request, res: Response) => {
+const { userId, products } = req.body;
+const order = await orderRepository.createOrder({ userId, products });
+res.json(order);
+};
+
+export const updateOrder = async (req: Request, res: Response) => {
+const { id } = req.params;
+const { userId, products } = req.body;
+const order = await orderRepository.updateOrder(Number(id), { userId, products });
+res.json(order);
+};
+
+export const deleteOrder = async (req: Request, res: Response) => {
+const { id } = req.params;
+await orderRepository.deleteOrder(Number(id));
+res.sendStatus(204);
+};
+
+export const getOrderById = async (req: Request, res: Response) => {
+const { id } = req.params;
+const order = await orderRepository.getOrderById(Number(id));
+res.json(order);
+};
+
+export const getOrders = async (req: Request, res: Response) => {
+const orders = await orderRepository.getOrders();
+res.json(orders);
+};
+
+Copy code11. Adicione as rotas no arquivo `index.ts` da seguinte maneira:
+import express from 'express';
+import usersRouter from './routes/user';
+import productsRouter from './routes/product';
+import ordersRouter from './routes/order';
+
+const app = express();
+
+app.use(express.json());
+
+app.use('/users', usersRouter);
+app.use('/products', productsRouter);
+app.use('/orders', ordersRouter);
+
+app.listen(3000, () => {
+console.log('Server listening on port 3000');
+});
+
+export default app;
+
+Copy code12. Crie os arquivos de rotas `user.ts`, `product.ts` e `order.ts` na pasta `src/routes` com o seguinte código:
+import express from 'express';
+import * as userController from '../controllers/user.controller';
+
+const router = express.Router();
+
+router.post('/', userController.createUser);
+router.put('/:id', userController.updateUser);
+router.delete('/:id', userController.deleteUser);
+router.get('/:id', userController.getUserById);
+router.get('/', userController.getUsers);
+
+export default router;
+
+Copy code
+import express from 'express';
+import * as productController from '../controllers/product.controller';
+
+const router = express.Router();
+
+router.post('/', productController.createProduct);
+router.put('/:id', productController.updateProduct);
+router.delete('/:id', productController.deleteProduct);
+router.get('/:id', productController.getProductById);
+router.get('/', productController.getProducts);
+
+export default router;
+
+Copy code
+import express from 'express';
+import * as orderController from '../controllers/order.controller';
+
+const router = express.Router();
+
+router.post('/', orderController.createOrder);
+router.put('/:id', orderController.updateOrder);
+router.delete('/:id', orderController.deleteOrder);
+router.get('/:id', orderController.getOrderById);
+router.get('/', orderController.getOrders);
+
+export default router;
+
+Copy codeCom esses passos, você terá criado os repositórios e controllers para as entidades User, Product e Order, e

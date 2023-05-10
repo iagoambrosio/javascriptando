@@ -3,4 +3,8 @@
 Neste repositório minha intenção é escrever uma api com o mínimo de código possível, 
 para solucionar a questão daquele tanto de rotas definidas em arquivos diferente, utilizarei os seguintes parametros.
 
-- Variáveis para designar o ambiente, sendo produção, teste e desenvolvimento
+- Os caminhos são referências a tabelas do banco de dados
+
+- O modelo Apllication tem o campo data que pode ser preenchido com objetos JSON, essa pe a base da nossa aplicação generalizada
+
+- A aplicação tem mocks e interfaces para testes em localhost

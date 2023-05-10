@@ -6,7 +6,7 @@ const subpaths = ['/','/:id','/:name','/:email']
 roteador.get(subpaths,(req,res)=>{
     res.status(200).json({caminho:`From GET to / `})
 })
-roteador.post(subpaths,(req,res)=>{
+roteador.post(subpaths, async (req,res)=>{
     console.log("IP:",req.ip,"Body:",req.body)
     const {name,email,password} = req.body
     if (!name || !password || !email){
@@ -17,11 +17,9 @@ roteador.post(subpaths,(req,res)=>{
             // Erro [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
             return
         } 
-try{createUser(req.body)
-    res.status(200).json({response:`Usuário Criado`})
-}
-catch{res.status(400).json({response:`Não Deu certo`})}
-
+const request = await createUser(req.body)
+    console.log(request)
+    return res.status(200).json({response:`Usuário Criado`})
 })
 roteador.patch(subpaths,(req,res)=>{
     res.status(200).json({caminho:`From PATCH to / `})
