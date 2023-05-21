@@ -6,7 +6,7 @@ WORKDIR /home/node
 
 COPY --chown=node package.json /home/node/
 
-RUN npm install
+RUN npm install && ls
 
 COPY --chown=node . .
 

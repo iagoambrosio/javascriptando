@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 function mongodbservice (){
    mongoose.connect(
-      'mongodb://mongoadmin:123456@mongodb:27017/admin'
+      'mongodb://mongoadmin:123456@mongo:27017/admin'
    )
    .then (console.log('Conectado a admin'))
    .catch ((err) => console.log(err))

@@ -2,7 +2,7 @@ version: '3'
 services:
   mongo:
     image: mongo
-    hostname: mongodb
+    hostname: mongo
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongoadmin 
       - MONGO_INITDB_ROOT_PASSWORD=123456 
