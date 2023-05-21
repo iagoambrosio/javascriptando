@@ -3,7 +3,7 @@ const express = require('express')
 // colocando a função express() dentro da variavel cExpress
 const Express = express()
 // chama função para conectar no banco de dados 
-const mongodbservice = require('./models/Conectar.js')
+const conectar = require('./services/Conectar.js')
 //chama a função de personRoutes
 const personRoutes = require('./routes/persons.js')
 //biblioteca de teste
@@ -11,7 +11,8 @@ const gerarPerson = require('./routes/testeGenCadastro.js')
 // chama o modulo de caminho
 const path = require('path')
 //Conecta no mongo
-mongodbservice()
+console.log(process.env.NODE_ENV)
+new conectar().banco()
 // middlewares (meios de comunicação)/ formas de ler os arquivos
 Express.use(express.json())    // <==== parse request body as JSON, para as request não virem em branco
 // para o node etender responses em JSON

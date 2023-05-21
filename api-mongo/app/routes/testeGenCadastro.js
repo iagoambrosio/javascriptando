@@ -27,8 +27,7 @@ roteador.post('/cliente', async (req,res)=>
     const {nome,sobrenome,email,telefone,cep} = req.body
     
     // validando se a query tem uma string e se chama url, caso sim, cria nomes aleatórios
-    if(req.query.url && typeof req.query.url== 'string'){
-
+    if(req.query.url && typeof req.query.url == 'string'){
         async function createUsers() {
             const url = await fetch(req.query.url)
             const urlJson = await url.json()
@@ -36,17 +35,16 @@ roteador.post('/cliente', async (req,res)=>
 }
 var urlRequest = await createUsers()
  //mapeamento da url para seus respectivos nomes no json, esse parametro retorna apenas os nomes
-const urlNome = urlRequest.map(objeto => objeto.nome)
-const urlSobrenome = urlRequest.map(objeto => objeto.sobrenome)
+const urlEmail = urlRequest.map(objeto => objeto.email)
 //consulta no banco
-const consultaBanco = await Cliente.find({ nome: { $in: urlNome } , sobrenome: { $in: urlSobrenome} })
+const consultaBanco = await Cliente.find({ email: { $in: urlEmail }  })
 try {
     console.log(consultaBanco.length)
     if (consultaBanco.length === 0){
     await Cliente.create(urlRequest)
-    return res.status(200).json({message : ` ${urlNome} cadastred `})
+    return res.status(200).json({message : ` ${urlEmail} cadastred `})
     }   else { 
-    return res.status(403).json({message : ` ${urlNome} Não pode ser cadastrado, porque já existe no banco `})
+    return res.status(403).json({message : ` ${consultaBanco.map(obj => obj.email)} Não pode ser cadastrado, porque já existe no banco `})
   }
 }
 catch(error)
@@ -55,7 +53,7 @@ catch(error)
 }
 
 }
-
+//verifica o POST do usuário sem o parametro
     if (!nome || !sobrenome || !email || !telefone){
             res.status(400).json({
              message : `Parametro nome ${req.body} é obrigatório`
