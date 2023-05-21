@@ -11,6 +11,17 @@ services:
       - 27017
     networks:
       - api
+  cassandra:
+    image: cassandra:3.0.29
+    hostname: cassandra
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin 
+      - MONGO_INITDB_ROOT_PASSWORD=123456 
+      - MONGO_INITDB_DATABASE=db_js 
+    ports:
+      - 7000
+    networks:
+      - api
   node:
     build:
       context: .

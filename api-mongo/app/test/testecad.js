@@ -79,7 +79,8 @@ class Cliente {
 
     }
     gerarCadastros(rounds, tamanhoNome, minimoLetras) {
-        if (!rounds|| !tamanhoNome || !minimoLetras) {rounds = 1, tamanhoNome = 10, minimoLetras = 4}
+        if (!tamanhoNome || !minimoLetras) {tamanhoNome = 10, minimoLetras = 4}
+        if (!rounds) {rounds = 1}
 
         for (let i = 0; i < rounds; i++) {
             let obj = {}

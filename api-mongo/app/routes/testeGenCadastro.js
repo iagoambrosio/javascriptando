@@ -9,7 +9,7 @@ const { response } = require('express');
 roteador.get('/cliente', async (req,res)=>{
 
     const randomUser = new gerarCadastros
-
+    //querys: qnt = quantidade de cadastros desejados, tmn = tamanho máximo do nome, minim = tamanho mínimo do cadastro
     try { const usergen = randomUser.gerarCadastros(Number(req.query.qnt),Number(req.query.tmn),Number(req.query.minim))
         res.status(200).json(usergen)
                
@@ -25,6 +25,36 @@ roteador.get('/cliente', async (req,res)=>{
 roteador.post('/cliente', async (req,res)=>
 {
     const {nome,sobrenome,email,telefone,cep} = req.body
+    
+    // validando se a query tem uma string e se chama url, caso sim, cria nomes aleatórios
+    if(req.query.url && typeof req.query.url== 'string'){
+
+        async function createUsers() {
+            const url = await fetch(req.query.url)
+            const urlJson = await url.json()
+            return urlJson
+}
+var urlRequest = await createUsers()
+ //mapeamento da url para seus respectivos nomes no json, esse parametro retorna apenas os nomes
+const urlNome = urlRequest.map(objeto => objeto.nome)
+const urlSobrenome = urlRequest.map(objeto => objeto.sobrenome)
+//consulta no banco
+const consultaBanco = await Cliente.find({ nome: { $in: urlNome } , sobrenome: { $in: urlSobrenome} })
+try {
+    console.log(consultaBanco.length)
+    if (consultaBanco.length === 0){
+    await Cliente.create(urlRequest)
+    return res.status(200).json({message : ` ${urlNome} cadastred `})
+    }   else { 
+    return res.status(403).json({message : ` ${urlNome} Não pode ser cadastrado, porque já existe no banco `})
+  }
+}
+catch(error)
+    {
+        res.status(500).json({error})
+}
+
+}
 
     if (!nome || !sobrenome || !email || !telefone){
             res.status(400).json({
@@ -33,7 +63,7 @@ roteador.post('/cliente', async (req,res)=>
             //Obrigatório dar return para sair do if e poder liberar a requisição do usuario
             // Erro [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
             return
-        } 
+        }
 //validação se o cadastro já existe
 //# precisa mudar para um controlador, onde ficam os dominios (regra de negócio)
     try{
@@ -49,7 +79,10 @@ roteador.post('/cliente', async (req,res)=>
     catch(error){
         res.status(500).json({error})
     }
+
 }
+
+
 )
 roteador.delete('/cliente/:id', async (req,res)=> {
     const id = req.params.id
