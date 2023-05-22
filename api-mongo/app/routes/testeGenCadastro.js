@@ -23,9 +23,7 @@ roteador.get('/cliente', async (req,res)=>{
 )
 //curl -X POST -H "Content-Type: application/json" -d '{"nome": "Raul" ,"sobrenome": "Jefferson" ,"email": "dsadasd@dusahdhsau.com" ,"telefone": 142341341 ,"cep": 1541254215}' http://localhost:3000/test/cliente
 roteador.post('/cliente', async (req,res)=>
-{
-    const {nome,sobrenome,email,telefone,cep} = req.body
-    
+{  const {nome,sobrenome,email,telefone,cep} = req.body 
     // validando se a query tem uma string e se chama url, caso sim, cria nomes aleatórios
     if(req.query.url && typeof req.query.url == 'string'){
         async function createUsers() {
@@ -34,7 +32,7 @@ roteador.post('/cliente', async (req,res)=>
             return urlJson
 }
 var urlRequest = await createUsers()
- //mapeamento da url para seus respectivos nomes no json, esse parametro retorna apenas os nomes
+ //mapeamento da url para seus respectivos nomes no json, esse parametro retorna apenas o email
 const urlEmail = urlRequest.map(objeto => objeto.email)
 //consulta no banco
 const consultaBanco = await Cliente.find({ email: { $in: urlEmail }  })
@@ -66,7 +64,6 @@ catch(error)
 //# precisa mudar para um controlador, onde ficam os dominios (regra de negócio)
     try{
         const consultaBanco = await Cliente.exists(req.body)
-
         if(consultaBanco === null){
             await Cliente.create(req.body)
         res.status(200).json({message : ` ${req.body.nome} cadastred `})
@@ -78,10 +75,7 @@ catch(error)
         res.status(500).json({error})
     }
 
-}
-
-
-)
+})
 roteador.delete('/cliente/:id', async (req,res)=> {
     const id = req.params.id
     try{
