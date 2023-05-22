@@ -10,12 +10,7 @@ const modelCliente = {
     cep: Number,
 }
 
-const Cliente = () => {
-    if (process.env.NODE_ENV === 'prod'){
-    mongoose.model('Cliente', modelCliente)
-  } else {
+const Cliente = mongoose.model('Cliente', modelCliente)
 
-  }
-}
 
 module.exports = Cliente
