@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const process = require('process')
+const fs = require('fs');
 
 const modelCliente = {
     nome: String,
@@ -8,8 +10,12 @@ const modelCliente = {
     cep: Number,
 }
 
-const Cliente = mongoose.model('Cliente', modelCliente
-)
+const Cliente = () => {
+    if (process.env.NODE_ENV === 'prod'){
+    mongoose.model('Cliente', modelCliente)
+  } else {
 
+  }
+}
 
 module.exports = Cliente
