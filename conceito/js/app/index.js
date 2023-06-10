@@ -5,7 +5,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended:true})) 
 const moduler = require('./src/routes/default')
-const mainPaths = ["/user","/application","/tenant"]
+const mainPaths = ["/user","/application","/tenant","/main"]
 // a nível de rota, o use recebe o caminho e manda para o Route do express
 app.get(mainPaths, moduler)
 app.post(mainPaths, moduler)
