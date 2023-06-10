@@ -8,7 +8,6 @@ async function main() {
   await prisma.$connect()
   // ... you will write your Prisma Client queries here
   console.log("Conectado ao mysql")
-
 }
 // caso precise desconectar a cada query, utilize o parametro assincrono abaixo
 main()

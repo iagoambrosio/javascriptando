@@ -1,46 +1,18 @@
-const prisma = require("../services/prisma")
-
+const prisma = require('../services/prisma')
+const localDatabase = require('../services/localstorage')
 
 class User {
-  
 
-	constructor(name, email ,password ){
-		this.name = name;
-		this.email = email;
-		this.password = password;
-	}
 
-  async createUser(user) {
-  
-    try {
-      await prisma.user.create({data:user})
-      return console.log("usuário criado no banco de dados")
-    } catch (e) {
-    return  console.log("Erro na tag: ",e.meta) 
+    async create(){
+    const user = await prisma[user].create({ data: req.body, } );
     }
-     // const allUsers = await prisma.user.findMany()
-     // console.log("Todos os usuários ",allUsers)
+    async find(){
+    const user = await prisma[user].findMany();
     }
-  async deleteUser(userId){
 
-  try {
-      await prisma.user.delete({where: {id: userId}})
-      return console.log("usuário criado no banco de dados")
-    } catch (e) {
-    return  console.log("Erro na tag: ",e.meta) 
-    }
-  }
-  
-  async getUsers(){
-
-    try {
-      const getusers = await prisma.user.findMany()
-        return getusers
-           } catch (e) {
-      return  console.log("Erro na tag: ",e.meta) 
-      }
-    }
-  
 }
-module.exports = createUser
 
+
+
+module.exports = User

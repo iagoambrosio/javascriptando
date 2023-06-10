@@ -10,7 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Tenant { 
   id Int @id @default(autoincrement()) 
   name String @unique 
@@ -27,11 +26,12 @@ model User {
   id Int @id @default(autoincrement()) 
   name String 
   email String @unique 
+  cel String @default("")
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  tenant Tenant @relation(fields: [tenantId], references: [id]) 
-  tenantId Int   
+  tenant Tenant @relation(fields: [tenantName], references: [name]) 
+  tenantName String   
   
   @@map("user")
 }
