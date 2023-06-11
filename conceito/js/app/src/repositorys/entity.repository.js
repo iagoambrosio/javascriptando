@@ -45,12 +45,16 @@ class Entity {
         const {name} = reqbody
         const key = Object.keys(uniquereq)
         const value = Object.values(uniquereq)
-        entity.modify('./data',key[0],value[0],name)
+        return entity.modify('./data',key[0],value[0],name)
     }
 }
-    async delete(requisicao,  uniquereq ){
+    async delete(requisicao, uniquereq){
+        if ( ENV === 'prod'){
         const entity = await prisma[requisicao].deleteMany({ where: uniquereq } );
         return entity
+}       else {
+        return entity.delete('./data')
+}
     }
 }
 
