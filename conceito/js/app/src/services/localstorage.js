@@ -16,7 +16,7 @@ class localDatabase {
             else {return }
           } else {
             fs.writeFileSync(database,JSON.stringify([]))
-            console.log(`a database ${database} Foi criada !`)
+            console.log(`a database ${database} Foi criada !, modo mockup ativo`)
           }
         
     }
@@ -43,11 +43,11 @@ class localDatabase {
       console.log(`a database ${database} foi excluida`)
     }
     modify (database,key,value,newWord){
+      console.log(database,key,value,newWord)
       const temp =  fs.readFileSync(database)
       const fileOpen = JSON.parse(temp)
       const newValue = fileOpen.map((item) => { if (item[key] === value) { return { ...item, [key]: newWord }; } return item; });
       fs.writeFileSync(database, JSON.stringify(newValue))
-      console.log(newValue)
   }   
 }
 
