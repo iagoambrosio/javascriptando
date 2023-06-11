@@ -7,29 +7,42 @@ const subpaths = ['/','/:id','/:name','/:email']
 roteador.get(subpaths,async (req,res)=>{
     //com base no caminho da requisição, chamamos o prisma para determinada tabela
     const requisicao = req.path.split('/')[1]
-    const user = await new entity().find(requisicao)
-    res.status(200).json(user);
+    try {const entidade = await new entity().find(requisicao)
+        res.status(200).json(entidade);
+    }
+    catch (error){
+        res.status(500).send({error:error.meta})
+    }
 })
 roteador.post(subpaths, async (req,res)=>{
     const requisicao = req.path.split('/')[1]
     try{
-    const user = await new entity().create(requisicao, req.body)
-    res.status(200).json(user);
+    const entidade = await new entity().create(requisicao, req.body)
+    res.status(200).json(entidade);
     }
     catch(error){
     res.status(500).send({error:error.meta})
     }
 })
-roteador.patch(subpaths,(req,res)=>{
-    res.status(200).json({caminho:`From PATCH to / `})
+roteador.patch(subpaths, async (req,res)=>{
+    const requisicao = req.path.split('/')[1]
+    const uniquereq = req.query
+    try{
+    const entidade = await new entity().update(requisicao, req.body, uniquereq)
+    res.status(200).json(entidade);
+    }
+    catch(error){
+    res.status(500).send({error:error.meta})
+    }
 })
-roteador.put(subpaths,(req,res)=>{
-    res.status(200).json({caminho:`From PUT to / `})
-})
-roteador.delete(subpaths,(req,res)=>{
-    res.status(200).json({caminho:`From DELETE to / `})
-})
-roteador.options(subpaths,(req,res)=>{
-    res.status(200).json({caminho:`From OPTIONS to / `})
+roteador.delete(subpaths, async (req,res)=>{
+    const requisicao = req.path.split('/')[1]
+    try{
+    const entidade = await new entity().delete(requisicao, req.body)
+    res.status(200).json(entidade);
+    }
+    catch(error){
+    res.status(500).send({error:error.meta})
+    }
 })
 module.exports = roteador
