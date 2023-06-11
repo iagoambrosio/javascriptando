@@ -18,6 +18,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./app:/home/node/app
+    environment:
+      - ENV=dev
     ports:
       - 3000:3000
     networks:

@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('node:fs')
 
 class localDatabase {
     constructor(database){
@@ -25,15 +25,17 @@ class localDatabase {
     const fileOpen = JSON.parse(temp)
     fileOpen.push(data)
     fs.writeFileSync(database, JSON.stringify(fileOpen))
+    return fileOpen
     }
     find (database,key,value){
       const temp =  fs.readFileSync(database)
       const fileOpen = JSON.parse(temp)
-      if ( !key || !value ){  
-      console.log(fileOpen)} 
+      if ( !key || !value ){
+      return fileOpen
+    }
       else {
       const result = fileOpen.filter((item)=> item[key] === value)
-      console.log(result)
+      return result
       }
     }
     delete (database){
@@ -51,3 +53,9 @@ class localDatabase {
 
 
 module.exports = localDatabase
+//exemple: 
+//const storage = new localDatabase('./data')
+
+//const data = {'name' : 'iago', 'idade' :'2'}
+
+//storage.write('./data',data)
