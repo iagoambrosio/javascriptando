@@ -2,7 +2,7 @@ const roteador = require('express').Router()
 const prisma = require('../services/prisma')
 const entity = require('../repositorys/entity.repository')
 
-const subpaths = ["/user","/user/:id","/application","/tenant","/tenant/:name"]
+const subpaths = ["/user","/application","/tenant"]
 //curl -X POST http://localhost:3000/user -H "Content-Type: application/json"  -d '{"name": "linuxize1", "email": "linuxize4@example.c2m", "cel":"11-3232213","tenantName" : "default" }' 
 roteador.get(subpaths,async (req,res)=>{
     //com base no caminho da requisição, chamamos o prisma para determinada tabela
