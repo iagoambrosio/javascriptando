@@ -2,11 +2,12 @@
 const { PrismaClient, Prisma } = require('@prisma/client')
 const { spawn } = require('child_process');
 
-const prisma = new PrismaClient()
+
 
 if (process.env.ENV==='prod'){
-
-async function main() {
+  var prisma = new PrismaClient()
+  async function main() {
+  
   // Connect the client
   await prisma.$connect()
   // ... you will write your Prisma Client queries here
@@ -27,4 +28,3 @@ async function main() {
 main()
 }
 module.exports = prisma
-

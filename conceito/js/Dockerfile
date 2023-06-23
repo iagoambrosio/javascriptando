@@ -6,7 +6,7 @@ WORKDIR /home/node
 
 COPY --chown=node package.json /home/node/
 
-RUN npm install --save-dev
+RUN npm install --save-dev 
 
 COPY --chown=node ./app ./app
 

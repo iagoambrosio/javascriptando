@@ -1,5 +1,4 @@
 const roteador = require('express').Router()
-const prisma = require('../services/prisma')
 const entity = require('../repositorys/entity.repository')
 
 const subpaths = ["/user","/application","/tenant"]
