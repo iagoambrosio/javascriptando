@@ -9,6 +9,7 @@ const personRoutes = require('./routes/persons.js')
 //biblioteca de teste
 const gerarPerson = require('./routes/testeGenCadastro.js')
 // chama o modulo de caminho
+const convertePdf = require('./routes/converterPdf.js')
 const path = require('path')
 //Conecta no mongo
 console.log(process.env.NODE_ENV)
@@ -20,7 +21,8 @@ Express.use(  express.urlencoded(  {extended:true}  )  )
 // padrão
 Express.get('/', (req,res)=>{  res.sendFile(path.join(__dirname,'index.html'))  })
 Express.use(`/`, personRoutes)
-Express.use(`/test`, gerarPerson)
+Express.use(`/util`, gerarPerson)
+Express.use(`/util`, convertePdf)
  // disponibilizar porta e fixa ip na em todas as interfaces
  Express.listen(3000)
  Express.bind('0.0.0.0')
