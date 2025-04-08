@@ -4,7 +4,7 @@ const pdfParse = require("pdf-parse");
 const upload = multer(); // Configuração sem salvar arquivo em disco
 
 // Rota GET para verificar se a API está funcionando
-roteador.get("/", (req, res) => {
+roteador.get("/converter", (req, res) => {
   res.status(200).json({ message: "API de conversão de PDF está funcionando!" });
 });
 
