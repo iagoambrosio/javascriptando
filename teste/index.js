@@ -52,7 +52,7 @@ async function uploadLargePdf(filePath, apiBaseUrl) {
     const fileSize = fileStats.size;
     
     // Tamanho de cada chunk (2MB)
-    const chunkSize = 3 * 1024 * 1024;
+    const chunkSize = 4 * 1024 * 1024;
     const totalChunks = Math.ceil(fileSize / chunkSize);
     
     console.log(`Arquivo: ${fileName}, Tamanho: ${(fileSize / (1024 * 1024)).toFixed(2)}MB`);
@@ -120,7 +120,7 @@ async function uploadLargePdf(filePath, apiBaseUrl) {
 /**
  * Função inteligente que escolhe o método adequado com base no tamanho do arquivo
  */
-async function uploadPdf(filePath, apiBaseUrl = 'https://gerar-cadastro.vercel.app/util') {
+async function uploadPdf(filePath, apiBaseUrl = 'http://localhost:3000/util') {
   try {
     // Verifica se o arquivo existe
     if (!fs.existsSync(filePath)) {
@@ -150,7 +150,7 @@ async function main() {
   const filePath = process.argv[2] || './teste2.pdf';
   
   // Pega a URL da API da linha de comando ou usa o padrão
-  const apiUrl = process.argv[3] || 'https://gerar-cadastro.vercel.app/util';
+  const apiUrl = process.argv[3] || 'http://localhost:3000/util';
   
   try {
     await uploadPdf(filePath, apiUrl);
