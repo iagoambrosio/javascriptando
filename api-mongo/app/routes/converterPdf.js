@@ -141,7 +141,7 @@ roteador.post("/iniciar-upload", (req, res) => {
           });
           delete activeUploads[fileId];
         }
-      }, 60 * 60 * 1000) // 1 hora de timeout
+      }, 60 * 60 * 100) // 1 hora de timeout
     };
     
     logInfo("Upload iniciado", { 
