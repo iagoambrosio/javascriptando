@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 const FormData = require('form-data');
+const api_url = "https://studious-halibut-x47r4vpvq5pfwqw-5000.app.github.dev/util"
 
 /**
  * Upload de arquivo diretamente (para arquivos menores)
@@ -103,12 +104,12 @@ async function uploadLargePdf(filePath, apiBaseUrl) {
     
     // Finaliza o upload
     console.log('Finalizando upload...');
-    const finalizeResponse = await axios.post(`${apiBaseUrl}/finalizar-upload`, {
+    const finalizeResponse = await axios.post(`${apiBaseUrl}/finalizar-upload?type=json`, {
       fileId: fileId
     });
     
     console.log('Upload completo! Texto extraído com sucesso.');
-    console.log('Resposta:', finalizeResponse.data);
+    console.log(finalizeResponse.data);
     
     return finalizeResponse.data;
   } catch (error) {
@@ -120,7 +121,7 @@ async function uploadLargePdf(filePath, apiBaseUrl) {
 /**
  * Função inteligente que escolhe o método adequado com base no tamanho do arquivo
  */
-async function uploadPdf(filePath, apiBaseUrl = 'http://localhost:3000/util') {
+async function uploadPdf(filePath, apiBaseUrl = api_url) {
   try {
     // Verifica se o arquivo existe
     if (!fs.existsSync(filePath)) {
@@ -150,7 +151,7 @@ async function main() {
   const filePath = process.argv[2] || './teste2.pdf';
   
   // Pega a URL da API da linha de comando ou usa o padrão
-  const apiUrl = process.argv[3] || 'http://localhost:3000/util';
+  const apiUrl = process.argv[3] || api_url;
   
   try {
     await uploadPdf(filePath, apiUrl);
