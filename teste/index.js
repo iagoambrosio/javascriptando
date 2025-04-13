@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 const FormData = require('form-data');
-const api_url = "https://studious-halibut-x47r4vpvq5pfwqw-5000.app.github.dev/util"
+const api_url = "https://laughing-space-guide-qxjvxp4p5gq2xjx7-5000.app.github.dev"
 
 /**
  * Upload de arquivo diretamente (para arquivos menores)
@@ -60,7 +60,7 @@ async function uploadLargePdf(filePath, apiBaseUrl) {
     console.log(`Iniciando upload em ${totalChunks} chunks...`);
     
     // Iniciar o processo de upload
-    const initResponse = await axios.post(`${apiBaseUrl}/iniciar-upload`, {
+    const initResponse = await axios.post(`${apiBaseUrl}/util/iniciar-upload`, {
       fileName: fileName,
       totalChunks: totalChunks
     });
@@ -88,7 +88,7 @@ async function uploadLargePdf(filePath, apiBaseUrl) {
       formData.append('chunkIndex', i);
       
       // Envia o chunk
-      const chunkResponse = await axios.post(`${apiBaseUrl}/enviar-chunk`, formData, {
+      const chunkResponse = await axios.post(`${apiBaseUrl}/util/enviar-chunk`, formData, {
         headers: {
           ...formData.getHeaders()
         }
@@ -104,7 +104,7 @@ async function uploadLargePdf(filePath, apiBaseUrl) {
     
     // Finaliza o upload
     console.log('Finalizando upload...');
-    const finalizeResponse = await axios.post(`${apiBaseUrl}/finalizar-upload?type=json`, {
+    const finalizeResponse = await axios.post(`${apiBaseUrl}/util/finalizar-upload`, {
       fileId: fileId
     });
     
@@ -134,7 +134,7 @@ async function uploadPdf(filePath, apiBaseUrl = api_url) {
     // Se o arquivo for menor que 5MB, usa o método direto
     if (stats.size <= 4 * 1024 * 1024) {
       console.log('Arquivo pequeno, usando upload direto');
-      return await uploadDirectPdf(filePath, `${apiBaseUrl}/converter`);
+      return await uploadDirectPdf(filePath, `${apiBaseUrl}/util/converter`);
     } else {
       console.log('Arquivo grande, usando upload em chunks');
       return await uploadLargePdf(filePath, apiBaseUrl);
