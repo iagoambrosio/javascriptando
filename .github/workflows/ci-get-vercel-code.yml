@@ -1,0 +1,31 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "backup" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+    - uses: actions/checkout@v4
+    - run: npm install
+      working-directory: get-vercel-source-code
+    - name: Set VERCEL_TOKEN environment variable 
+      run: echo "VERCEL_TOKEN=${{ secrets.VERCEL_TOKEN }}" >> $GITHUB_ENV    
+    - run: node index.js ${{ github.event.head_commit.message }} ../${{ github.event.head_commit.message }}
+      working-directory: get-vercel-source-code
+    - name: Commit new content
+      run: |
+        git config --global user.email "${{ github.actor }}@gmail.com"
+        git config --global user.name "${{ github.actor }}"
+        git add .
+        git commit -m "Update branch with new content"
+        git push origin ${GITHUB_REF##*/}

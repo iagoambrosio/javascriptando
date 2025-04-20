@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  nodejs-vite-app:
+    image: oven/bun
+    entrypoint: ["sh", "-c", "bun install && bun run dev"]
+    environment:
+      - ENV=DEV
+    volumes:
+      - .:/app
+    working_dir: /app
+    ports:
+      - "5173:5173"
+      - "4173:4173"
+      - "8080:8080"
+      - "3000:3000"
