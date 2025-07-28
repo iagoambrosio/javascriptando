@@ -8,33 +8,74 @@
 </head>
     <body>
         <div>
-            <h2>Formulário html</h2>
-          <form action="http://localhost:3000/test/cliente" method="get">
-            <input type="text" name="qnt">
-            <input type="submit" />
-          </form>
+            <h2>Documentação da API /person</h2>
+            <p><strong>Criar uma pessoa (POST):</strong></p>
+            <pre>
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"name": "João", "salary": 2000, "approved": true}' \
+  http://SEU_HOST:3000/person
+            </pre>
+            <p><strong>Recuperar todas as pessoas (GET):</strong></p>
+            <pre>
+curl -X GET http://SEU_HOST:3000/person
+            </pre>
+            <p><strong>Recuperar uma pessoa por id (GET):</strong></p>
+            <pre>
+curl -X GET http://SEU_HOST:3000/person/ID_DA_PESSOA
+            </pre>
         </div>
         <div>
-            <h2>Formulário com fetch</h2>
-          <form action="http://localhost:3000/test/cliente" method="get">
-            <input type="text" name="qnt">
-            <input type="submit" />
-          </form>
+            <h2>Criar uma pessoa via formulário</h2>
+            <form id="personForm">
+                <input type="text" name="name" placeholder="Nome" required />
+                <input type="number" name="salary" placeholder="Salário" required />
+                <label>
+                  <input type="checkbox" name="approved" /> Aprovado
+                </label>
+                <button type="submit">Criar Pessoa</button>
+            </form>
+            <div id="personResult"></div>
         </div>
         <div>
-            <h2>Formulário POST</h2>
-          <form action="http://localhost:3000/test/cliente" method="get">
-            <input type="text" name="qnt">
-            <input type="submit" />
-          </form>
+            <h2>Buscar pessoa por ID</h2>
+            <form id="getPersonForm">
+                <input type="text" name="personId" placeholder="ID da pessoa" required />
+                <button type="submit">Buscar</button>
+            </form>
+            <div id="getPersonResult"></div>
         </div>
-        <div>
-            <h2>Formulário PUT</h2>
-          <form action="http://localhost:3000/test/users" method="get">
-            <input type="text" name="qnt">
-            <input type="submit" />
-          </form>
-        </div>
+        <script>
+        // Função para obter o host dinamicamente
+        const apiBase = window.location.origin;
+
+        // Formulário para criar pessoa
+        document.getElementById('personForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = {
+                name: form.name.value,
+                salary: Number(form.salary.value),
+                approved: form.approved.checked
+            };
+            const res = await fetch(apiBase + '/person', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            const result = await res.json();
+            document.getElementById('personResult').innerText = JSON.stringify(result, null, 2);
+        };
+
+        // Formulário para buscar pessoa por ID
+        document.getElementById('getPersonForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const personId = form.personId.value;
+            const res = await fetch(apiBase + '/person/' + personId);
+            const result = await res.json();
+            document.getElementById('getPersonResult').innerText = JSON.stringify(result, null, 2);
+        };
+        </script>
       <div>
         <p>Rotas na aplicação:</p>
         <p>Para testes, utilize /test/cliente, com os parametros: </p>
