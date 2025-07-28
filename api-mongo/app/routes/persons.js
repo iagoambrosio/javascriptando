@@ -57,11 +57,12 @@ const Person = require('../models/Person.js')
     }
     try{
         //tenta criar os dados
-        await Person.create(person)
+    const person_db = await Person.create(person);
 
-        res.status(201).json({ 
-            message: 'Pessoa criada com sucesso no sistema'
-        })
+    res.status(201).json({ 
+        message: 'Pessoa criada com sucesso no sistema',
+        id: person_db._id // Retorna o ID da pessoa criada
+    });
 
     } catch (error){
         //caso tenha algum problema, ele devolve os erros
