@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --watch ./app/index.js 3000"
+    "start": "node ./app/index.js 3000",
+    "dev": "node --watch ./app/index.js 3000"
   },
   "author": "Iago Silva Ambrosio",
   "license": "ISC",
