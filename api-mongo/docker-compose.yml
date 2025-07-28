@@ -29,8 +29,6 @@ services:
     privileged: true
     environment:
       - NODE_ENV=prod
-    volumes:
-      - ./app:/home/node/app
     ports:
       - 3000
     networks:
