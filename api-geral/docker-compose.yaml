@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  api-geral:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    working_dir: /app
+    command: npm run dev
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: mysql://root:root@mysql:3306/api_geral
+    depends_on:
+      - mysql
+  teste:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    command: npm run teste 
+    depends_on:
+      - mysql
+      - api-geral
+  mysql:
+    image: mysql:8.4
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: api_geral
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+volumes:
+  mysql_data:

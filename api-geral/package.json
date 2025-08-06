@@ -1,0 +1,29 @@
+{
+  "name": "api-geral",
+  "version": "1.0.0",
+  "description": "Node.js API with Fastify, Swagger UI, and Zod following best practices.",
+  "main": "src/server.js",
+  "scripts": {
+    "prisma:dev-only":"npx prisma migrate reset --force ; npm run prisma:init",
+    "prisma:init":"npx prisma migrate dev --name init",
+    "prisma:generate": "prisma generate --schema=./prisma/schema.prisma",
+    "prisma:migrate": "prisma migrate deploy --schema=./prisma/schema.prisma",
+    "dev": "npm run prisma:dev-only && npm run prisma:migrate && npm run prisma:generate && node src/server.js",
+    "teste" : "node teste/test-api.js"
+  },
+  "keywords": ["fastify", "swagger", "zod", "api"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "latest",
+    "@fastify/swagger": "latest",
+    "@fastify/swagger-ui": "latest",
+    "zod": "latest",
+    "@prisma/client": "latest",
+    "bcrypt": "latest",
+    "axios": "latest"
+  },
+  "devDependencies": {
+    "prisma": "latest"
+  }
+}
